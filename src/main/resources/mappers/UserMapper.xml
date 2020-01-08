@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?> 
+	<!DOCTYPE mapper PUBLIC "-//ibatis.apache.org//DTD Mapper 3.0//EN" 
+		"http://ibatis.apache.org/dtd/ibatis-3-mapper.dtd">
+	<!-- namespace表示命名空间,值必须为接口的名称(包括包名)-->
+	<!-- 实现类没有,mybatis框架会生成接口的实现类 -->
+	<mapper namespace="datatables.test.mapper.UserMapper">
+		<!--  -->
+		<select id="selectCount" resultType="java.lang.Integer">
+			select count(id) as count from t_user
+		</select>
+		
+		<!-- 分页 -->
+		<select id="selectAll" resultType="datatables.test.bean.User">
+		 select
+			id,name,age,address,sex
+		from
+			t_user
+		order by
+			id asc
+		limit #{offset},#{count}
+		 </select>
+			
+		<delete id="deleteById">
+			delete 
+			from t_user
+			where id=#{id}
+		</delete>
+		
+		<update id="updateById" parameterType="datatables.test.bean.User">
+			update  t_user
+			set
+				name=#{name},
+				age=#{age},
+				address=#{address},
+				sex=#{sex}
+			where 
+			id=#{id}
+		</update>
+	</mapper>
+	
+	
+	
+	
+	
+	
+	
+	
+	
